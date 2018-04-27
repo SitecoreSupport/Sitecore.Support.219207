@@ -59,9 +59,9 @@
                             flag = true;
 
                     #region FIX:Added Warning instead of Error when there are no lists to unsibscribe from.
-
+                    //Updated per Conservative Party request to use not display this warning
                     if (list.Count == 0)
-                        Log.Warn(
+                        Log.Debug(
                             string.Format(
                                 "An attempt to remove contact '{0}' from include lists without specifying include list ids was registered. Contact will be added to Global-Opt-Out list instead.",
                                 args.ContactId), this);
