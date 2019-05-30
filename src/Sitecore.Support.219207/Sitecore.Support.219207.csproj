@@ -58,6 +58,10 @@
       <HintPath>..\packages\EXM.Sitecore.EmailCampaign.3.4.2\lib\Sitecore.EmailCampaign.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Sitecore.ListManagement.ContentSearch, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SC.Sitecore.ListManagement.ContentSearch.8.2.3\lib\Sitecore.ListManagement.ContentSearch.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />

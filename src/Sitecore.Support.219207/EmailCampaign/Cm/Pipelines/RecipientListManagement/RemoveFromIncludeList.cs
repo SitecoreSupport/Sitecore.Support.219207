@@ -57,19 +57,29 @@
                 throw new EmailCampaignException(EcmTexts.NoListAssociationsForContact, recipientId);
             }
 
-            var listIdsToRemoveContactFrom = includedContactListIds.Intersect(contactListAssociations.DefaultProperty.ContactListIds);
+            var listIdsToRemoveContactFrom = includedContactListIds
+                .Intersect(contactListAssociations.DefaultProperty.ContactListIds)
+                .Where(listid => recipientManager.GetRecipientList(listid).Type == "ContactList");
 
             try
             {
                 bool removedFromAny = false;
+                bool listsExist = false;
 
                 foreach (var listId in listIdsToRemoveContactFrom)
                 {
+                    listsExist = true;
                     bool removed = _ecmFactory.Bl.SubscriptionManager.RemoveUserFromList(recipientId, listId);
                     if (removed)
                     {
                         removedFromAny = true;
                     }
+                }
+
+                if (!listsExist)
+                {
+                    _logger.LogDebug($"There are no available non-segmented lists for contact '{args.ContactId}' and message '{args.MessageId}' to be removed from");
+                    return;
                 }
 
                 if (!removedFromAny)
